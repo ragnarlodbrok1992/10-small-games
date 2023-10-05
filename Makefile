@@ -1,13 +1,9 @@
-CC=clang
-CFLAGS=-Wall -I/usr/include/SDL2
-LDFLAGS=-lSDL -lGL
-
 TARGET=triangle
 
 all: $(TARGET)
 
-$(TARGET):
-	clang src/main.cpp -o $(TARGET)
+$(TARGET): clean
+	g++ src/main.cpp -o $(TARGET) -Wall `sdl2-config --cflags --libs` -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf
 
 clean:
 	rm -f *.o $(TARGET)
