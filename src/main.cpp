@@ -1,15 +1,25 @@
+// Global includes - frameworks and such
 #include <SDL2/SDL.h>
 
+// Compiler includes
 #include <stdio.h>
 
-const int SCREEN_WIDTH  = 800;
-const int SCREEN_HEIGHT = 600;
+// Local includes - engine and game stuff
+#include "entities/pad.hpp"
 
+// Framework variables
 SDL_Window*   WINDOW = NULL;
 SDL_Surface*  SURFACE = NULL;
 SDL_Renderer* RENDERER = NULL;
 
+// Engine variables
 bool ENGINE_RUNNING = true;
+const int SCREEN_WIDTH  = 800;
+const int SCREEN_HEIGHT = 600;
+
+// Entities
+Pad   PAD;
+Color PAD_COLOR = {.r = 0x27, .g = 0xe6, .b = 0xd5, .a = 0xFF};
 
 int main() {
   printf("Small engine for 10 games.\n");
@@ -27,6 +37,9 @@ int main() {
     printf("Window couldn't be created! SDL_Error: %s\n", SDL_GetError());
     return 1;
   }
+
+  // Initialize entities
+  init_pad(&PAD, 100, 100, 100, 20, PAD_COLOR);
 
   while (ENGINE_RUNNING) {
     SDL_Event e;
