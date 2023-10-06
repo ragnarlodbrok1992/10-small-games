@@ -46,4 +46,8 @@ void simulate_pad(Pad* pad, PadControls* pad_controls) {
     // Check right
     if (pad_controls->controls & 1 << 1) pad->geo.x += PAD_SPEED;
   }
+
+  // Check left - right boundries
+  if (pad->geo.x < 0) pad->geo.x = 0;
+  if (pad->geo.x + pad->geo.size_x > SCREEN_WIDTH) pad->geo.x = SCREEN_WIDTH - pad->geo.size_x;
 }

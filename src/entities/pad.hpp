@@ -13,7 +13,7 @@ constexpr int PAD_X_SIZE = 100;
 constexpr int PAD_Y_SIZE = 20;
 constexpr int PAD_X = (int)((SCREEN_WIDTH / 2) - (PAD_X_SIZE / 2));
 constexpr int PAD_Y = (int) (SCREEN_HEIGHT * 0.9);
-constexpr int PAD_SPEED = 5;
+constexpr int PAD_SPEED = 8;
 
 // Structures
 

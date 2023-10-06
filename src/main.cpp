@@ -8,6 +8,7 @@
 // Local includes - engine and game stuff
 #include "entities/pad.hpp"
 #include "entities/ball.hpp"
+#include "entities/block.hpp"
 #include "configuration/consts.hpp"
 
 // Framework variables
