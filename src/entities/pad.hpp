@@ -1,8 +1,17 @@
 #ifndef _H_PAD
 #define _H_PAD
 
+#include <SDL2/SDL.h>
+
+
 #include "geometry.hpp"
 #include "../rendering/renderinfo.hpp"
+#include "../configuration/consts.hpp"
+
+constexpr int PAD_X_SIZE = 100;
+constexpr int PAD_Y_SIZE = 20;
+constexpr int PAD_X = (int)((SCREEN_WIDTH / 2) - (PAD_X_SIZE / 2));
+constexpr int PAD_Y = (int) (SCREEN_HEIGHT * 0.9);
 
 // Structures
 
@@ -15,6 +24,7 @@ typedef struct {
 
 // Functions
 void init_pad(Pad* pad, int x, int y, int size_x, int size_y, Color color);
+void render_pad(SDL_Renderer* renderer, Pad* pad);
 
 #endif /* _H_PAD */
 
