@@ -1,4 +1,4 @@
-TARGET=triangle
+TARGET=breakout
 ADDITIONAL_SOURCE=src/entities/pad.cpp src/entities/ball.cpp
 
 all: $(TARGET)

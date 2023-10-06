@@ -43,10 +43,28 @@ void simulate_ball(Ball* ball, Pad* pad) {
   if (ball->geo.x - ball->geo.radius <= 0)             x_movement *= -1;
 
   // Pad
-  // bool x_might_intersect = false;
-  // bool y_might_intersect = false;
+  bool x_might_intersect = false;
+  bool y_might_intersect = false;
   // if ((ball->geo.x + ball->geo.radius) > (pad->geo.x - pad->geo.size_x) || (ball->geo.x - ball->geo.radius) < (pad->geo.x + pad->geo.size_x)) printf("INFO: x might intersect!\n");
   // if ((false) > (false) || (false) < (false)) printf("INFO: y might intersect!\n");
+
+  int ball_left_x = ball->geo.x - ball->geo.radius;
+  int ball_right_x = ball->geo.x + ball->geo.radius;
+  int pad_left_x = pad->geo.x - pad->geo.size_x;
+  int pad_right_x = pad->geo.x + pad->geo.size_x;
+
+  int ball_top_y = ball->geo.y - ball->geo.radius;
+  int ball_bottom_y = ball->geo.y + ball->geo.radius;
+  int pad_top_y = pad->geo.y - pad->geo.size_y;
+  int pad_bottom_y = pad->geo.y + pad->geo.size_y;
+
+  x_might_intersect = (((pad_left_x) < (ball_left_x)) && ((ball_left_x) < (pad_right_x))) || (((pad_left_x) < (ball_right_x)) && ((ball_right_x) < (pad_right_x)));
+  y_might_intersect = (((pad_top_y) < (ball_top_y)) && ((ball_top_y) < (pad_bottom_y))) || (((pad_top_y) < (ball_bottom_y)) && ((ball_bottom_y) < (pad_bottom_y)));
+
+  if (x_might_intersect && y_might_intersect) {
+    // printf("INFO: we have a collision!\n");
+    y_movement *= -1;
+  }
 
   ball->geo.x += x_movement * BALL_SPEED;
   ball->geo.y += y_movement * BALL_SPEED;
