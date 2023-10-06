@@ -34,3 +34,16 @@ void render_pad(SDL_Renderer* renderer, Pad* pad) {
   SDL_RenderFillRect(renderer, &rect);
 
 }
+
+void simulate_pad(Pad* pad, PadControls* pad_controls) {
+  // Check collision with early return
+
+  // printf("INFO: pad_controls.controls -> %x\n", pad_controls->controls);
+
+  if (pad_controls->controls > 0) {
+    // Check left
+    if (pad_controls->controls & 1 << 2) pad->geo.x -= PAD_SPEED;
+    // Check right
+    if (pad_controls->controls & 1 << 1) pad->geo.x += PAD_SPEED;
+  }
+}

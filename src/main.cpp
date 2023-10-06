@@ -20,6 +20,7 @@ bool ENGINE_RUNNING = true;
 
 // Entities
 Pad   PAD;
+PadControls PAD_CONTROLS;
 Ball  BALL;
 Color PAD_COLOR = {.r = 0x27, .g = 0xe6, .b = 0xd5, .a = 0xFF};
 
@@ -48,11 +49,19 @@ int main() {
     return 1;
   }
 
+  // Initialize local entities
+  PAD_CONTROLS.controls = 0;
+
   // Initialize entities
   init_pad(&PAD, PAD_X, PAD_Y, PAD_X_SIZE, PAD_Y_SIZE, PAD_COLOR);
   init_ball(&BALL, BALL_X, BALL_Y, BALL_RADIUS);
 
+  int PREVIOUS_FRAME_TIME = 0;
+
   while (ENGINE_RUNNING) {
+    // Zero control variables
+    // PAD_CONTROLS.controls = 0;
+
     SDL_Event e;
 
     // Events
@@ -68,10 +77,44 @@ int main() {
             case SDLK_q:
               ENGINE_RUNNING = false;
               break;
+
+          // Pad controls
+            case SDLK_LEFT:
+              // PAD_CONTROLS.controls += 0x10; // @TODO do not do stuff like that - just set the bit
+              PAD_CONTROLS.controls |= 1 << 2; // Defined in pad.hpp
+              break;
+            case SDLK_RIGHT:
+              // PAD_CONTROLS.controls += 0x01; // @TODO same as above
+              PAD_CONTROLS.controls |= 1 << 1; // Defined in pad.hpp
+              break;
+          }
+          break;
+
+        case SDL_KEYUP:
+          switch (e.key.keysym.sym) {
+            // Pad controls
+            case SDLK_LEFT:
+              PAD_CONTROLS.controls &= ~(1 << 2);
+              break;
+            case SDLK_RIGHT:
+              PAD_CONTROLS.controls &= ~(1 << 1);
+              break;
           }
           break;
       }
     }
+
+    int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - PREVIOUS_FRAME_TIME);
+
+    if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
+      SDL_Delay(time_to_wait);
+    }
+
+    PREVIOUS_FRAME_TIME = SDL_GetTicks();
+
+    // Simulate state @TODO we need to have delta time for this and this requires us to use floats????
+    simulate_pad(&PAD, &PAD_CONTROLS);
+    simulate_ball(&BALL, &PAD);
 
     // Render
     // Clear screen

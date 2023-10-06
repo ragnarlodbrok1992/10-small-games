@@ -7,8 +7,10 @@
 constexpr int BALL_X = 100;
 constexpr int BALL_Y = 100;
 constexpr int BALL_RADIUS = 20;
+constexpr int BALL_SPEED = 3;
 
 #include "geometry.hpp"
+#include "pad.hpp"
 #include "../rendering/renderinfo.hpp"
 #include "../configuration/consts.hpp"
 
@@ -21,6 +23,7 @@ typedef struct {
 // Functions
 void init_ball(Ball* ball, int x, int y, int radius);
 void render_ball(SDL_Renderer* renderer, Ball* ball);
+void simulate_ball(Ball* ball, Pad* pad);
 
 #endif /* _H_BALL */
 
