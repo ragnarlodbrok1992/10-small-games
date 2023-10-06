@@ -1,5 +1,5 @@
 TARGET=triangle
-ADDITIONAL_SOURCE=src/entities/pad.cpp
+ADDITIONAL_SOURCE=src/entities/pad.cpp src/entities/ball.cpp
 
 all: $(TARGET)
 

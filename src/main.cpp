@@ -7,6 +7,7 @@
 
 // Local includes - engine and game stuff
 #include "entities/pad.hpp"
+#include "entities/ball.hpp"
 #include "configuration/consts.hpp"
 
 // Framework variables
@@ -19,6 +20,7 @@ bool ENGINE_RUNNING = true;
 
 // Entities
 Pad   PAD;
+Ball  BALL;
 Color PAD_COLOR = {.r = 0x27, .g = 0xe6, .b = 0xd5, .a = 0xFF};
 
 int main() {
@@ -48,6 +50,7 @@ int main() {
 
   // Initialize entities
   init_pad(&PAD, PAD_X, PAD_Y, PAD_X_SIZE, PAD_Y_SIZE, PAD_COLOR);
+  init_ball(&BALL, BALL_X, BALL_Y, BALL_RADIUS);
 
   while (ENGINE_RUNNING) {
     SDL_Event e;
@@ -77,6 +80,9 @@ int main() {
 
     // Render pad
     render_pad(RENDERER, &PAD);
+
+    // Render ball
+    render_ball(RENDERER, &BALL);
 
     // Switch buffer - backbuffer to front
     SDL_RenderPresent(RENDERER);
