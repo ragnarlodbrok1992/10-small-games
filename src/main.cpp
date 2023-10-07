@@ -58,12 +58,23 @@ int main() {
   for (int x = 0; x < NUM_OF_BLOCKS; x++) {
     int local_x = x % BLOCKS_X;
     int local_y = (int) x / BLOCKS_X;
+    BLOCKS[x] = init_block(local_x, local_y);
 
+#if 0
     printf("INFO: initializing block nr %d\n", x);
     printf("INFO:   local_x %d\n", local_x);
     printf("INFO:   local_y %d\n", local_y);
     printf("\n");
+#endif
   }
+
+#if 0
+  for (auto& block : BLOCKS) {
+    printf("INFO: block.geo.x %d\n", block.geo.x);
+    printf("INFO: block.geo.y %d\n", block.geo.y);
+    printf("\n");
+  }
+#endif
 
   // Initialize entities
   init_pad(&PAD, PAD_X, PAD_Y, PAD_X_SIZE, PAD_Y_SIZE, PAD_COLOR);
@@ -139,6 +150,9 @@ int main() {
 
     // Render ball
     render_ball(RENDERER, &BALL);
+
+    // Render blocks
+    render_blocks(RENDERER, BLOCKS, NUM_OF_BLOCKS);
 
     // Switch buffer - backbuffer to front
     SDL_RenderPresent(RENDERER);

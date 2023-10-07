@@ -1,5 +1,5 @@
 TARGET=breakout
-ADDITIONAL_SOURCE=src/entities/pad.cpp src/entities/ball.cpp
+ADDITIONAL_SOURCE=src/entities/pad.cpp src/entities/ball.cpp src/entities/block.cpp
 
 all: $(TARGET)
 
