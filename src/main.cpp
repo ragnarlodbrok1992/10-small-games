@@ -23,6 +23,8 @@ bool ENGINE_RUNNING = true;
 Pad   PAD;
 PadControls PAD_CONTROLS;
 Ball  BALL;
+constexpr int NUM_OF_BLOCKS = BLOCKS_X * BLOCKS_Y;
+Block BLOCKS[NUM_OF_BLOCKS];
 Color PAD_COLOR = {.r = 0x27, .g = 0xe6, .b = 0xd5, .a = 0xFF};
 
 int main() {
@@ -52,6 +54,16 @@ int main() {
 
   // Initialize local entities
   PAD_CONTROLS.controls = 0;
+
+  for (int x = 0; x < NUM_OF_BLOCKS; x++) {
+    int local_x = x % BLOCKS_X;
+    int local_y = (int) x / BLOCKS_X;
+
+    printf("INFO: initializing block nr %d\n", x);
+    printf("INFO:   local_x %d\n", local_x);
+    printf("INFO:   local_y %d\n", local_y);
+    printf("\n");
+  }
 
   // Initialize entities
   init_pad(&PAD, PAD_X, PAD_Y, PAD_X_SIZE, PAD_Y_SIZE, PAD_COLOR);

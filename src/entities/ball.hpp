@@ -6,7 +6,7 @@
 
 constexpr int BALL_X = 100;
 constexpr int BALL_Y = 100;
-constexpr int BALL_RADIUS = 20;
+constexpr int BALL_RADIUS = 15;
 constexpr int BALL_SPEED = 6;
 
 #include "geometry.hpp"
